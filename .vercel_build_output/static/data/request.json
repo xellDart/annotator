@@ -1,0 +1,1187 @@
+[
+	{
+		"section": "Account",
+		"data": [
+			{
+				"title": "Login account",
+				"description": "Create a JWT from your credentials that will allow you to modify parameters of your account",
+				"type": "POST",
+				"path": "user/login",
+				"attribute": [
+					{
+						"attribute": "email.email",
+						"type": "map",
+						"description": "email from account"
+					},
+					{
+						"attribute": "password",
+						"type": "string",
+						"description": "password from account"
+					}
+				],
+				"headers": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "string",
+						"description": "jwt string"
+					}
+				]
+			},
+			{
+				"title": "Company details",
+				"description": "Get details from your company registered on nebuIA like api keys and widget configuration",
+				"type": "GET",
+				"path": "company",
+				"attribute": [
+					{
+						"attribute": "email.email",
+						"type": "map",
+						"description": "email from account"
+					},
+					{
+						"attribute": "password",
+						"type": "string",
+						"description": "passwod from account"
+					}
+				],
+				"headers": [
+					{
+						"key": "Accept-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer token"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "string",
+						"description": "jwt string"
+					}
+				]
+			},
+			{
+				"title": "Change IP",
+				"description": "Change ip addres for temporal code generation in services, you must provide the address from which the requests are made",
+				"type": "PUT",
+				"path": "company/ip",
+				"attribute": [
+					{
+						"attribute": "ip",
+						"type": "string",
+						"description": "ip server address"
+					}
+				],
+				"headers": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer token"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "string",
+						"description": "operation result"
+					}
+				]
+			},
+			{
+				"title": "Change Origin",
+				"description": "Change the domain your widget integration can work on, you must include the network protocol (http / https), as well as subdomain and domain",
+				"type": "PUT",
+				"path": "company/origin",
+				"attribute": [
+					{
+						"attribute": "origin",
+						"type": "string",
+						"description": "origin address with https prefix"
+					}
+				],
+				"headers": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer token"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "string",
+						"description": "operation result"
+					}
+				]
+			}
+		]
+	},
+	{
+		"section": "Temporal password",
+		"data": [
+			{
+				"title": "Generate services password",
+				"description": "Generates a temporary 8-digit password, essential to be able to use the identity verification services, It lasts 1 hour and can only be generated from the previously registered IP",
+				"type": "POST",
+				"path": "otp/generate/time_key",
+				"attribute": [],
+				"headers": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "api_key",
+						"value": "api public value"
+					},
+					{
+						"key": "api_secret",
+						"value": "api secret value"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "string",
+						"description": "8-digit password"
+					}
+				]
+			},
+			{
+				"title": "Services password verification",
+				"description": "You can verify the validity of a time key before its use, to avoid response errors in the service methods",
+				"type": "GET",
+				"path": "verify/time_key/{password}",
+				"attribute": [],
+				"headers": [
+					{
+						"key": "api_key",
+						"value": "api public value"
+					},
+					{
+						"key": "api_secret",
+						"value": "api secret value"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "string",
+						"description": "operation result"
+					}
+				]
+			}
+		]
+	},
+	{
+		"section": "Widget",
+		"data": [
+			{
+				"title": "Change theme",
+				"description": "Change the colors in which the widget is rendered, as well as the dark mode",
+				"type": "PUT",
+				"path": "company/theme",
+				"attribute": [
+					{
+						"attribute": "primary_color",
+						"type": "string",
+						"description": "hexadeciaml color"
+					},
+					{
+						"attribute": "secondary_color",
+						"type": "string",
+						"description": "hexadeciaml color"
+					},
+					{
+						"attribute": "dark_mode",
+						"type": "boolean",
+						"description": "enable/disable dark mode"
+					}
+				],
+				"headers": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer token"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "string",
+						"description": "operation result"
+					}
+				]
+			},
+			{
+				"title": "Change steps order",
+				"description": "Change the order of the steps to show in the widget, you can also eliminate unwanted steps",
+				"type": "PUT",
+				"path": "company/steps",
+				"attribute": [
+					{
+						"attribute": "steps",
+						"type": "array string",
+						"description": "steps names [id, liveness, email]"
+					}
+				],
+				"headers": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer token"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "string",
+						"description": "operation result"
+					}
+				]
+			}
+		]
+	},
+	{
+		"section": "Report",
+		"data": [
+			{
+				"title": "Generate report",
+				"description": "You must generate a report to associate with a verification, if no verification was carried out, it will be deleted after 12 hours",
+				"type": "POST",
+				"path": "services/report",
+				"attribute": [],
+				"headers": [
+					{
+						"key": "api_key",
+						"value": "api public value"
+					},
+					{
+						"key": "api_secret",
+						"value": "api secret value"
+					},
+					{
+						"key": "time_key",
+						"value": "temporal password value"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "string",
+						"description": "uuid from report generated"
+					}
+				]
+			},
+			{
+				"title": "Get report details",
+				"description": "You can get all verification data from ID document, face spoofing score, face match and address values",
+				"type": "GET",
+				"path": "services/report",
+				"attribute": [],
+				"query": [
+					{
+						"attribute": "report",
+						"type": "string",
+						"description": "report uuid generated"
+					}
+				],
+				"headers": [
+					{
+						"key": "api_key",
+						"value": "api public value"
+					},
+					{
+						"key": "api_secret",
+						"value": "api secret value"
+					},
+					{
+						"key": "time_key",
+						"value": "temporal password value"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "map",
+						"description": "report details"
+					}
+				]
+			},
+			{
+				"title": "Invalidate report",
+				"description": "You can delete a report and all its resources once you do not require it, it cannot be recovered once deleted",
+				"type": "DELETE",
+				"path": "services/invalidate",
+				"attribute": [],
+				"query": [
+					{
+						"attribute": "report",
+						"type": "string",
+						"description": "report uuid generated"
+					}
+				],
+				"headers": [
+					{
+						"key": "api_key",
+						"value": "api public value"
+					},
+					{
+						"key": "api_secret",
+						"value": "api secret value"
+					},
+					{
+						"key": "time_key",
+						"value": "temporal password value"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "string",
+						"description": "operation result"
+					}
+				]
+			}
+		]
+	},
+	{
+		"section": "Verification",
+		"data": [
+			{
+				"title": "Crop document",
+				"description": "You will be able to obtain the document cut from an image, to present to the user before proceeding to the verification",
+				"type": "POST",
+				"path": "services/crop",
+				"attribute": [
+					{
+						"attribute": "front",
+						"type": "image",
+						"description": "image from document"
+					}
+				],
+				"headers": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data"
+					},
+					{
+						"key": "api_key",
+						"value": "api public value"
+					},
+					{
+						"key": "api_secret",
+						"value": "api secret value"
+					},
+					{
+						"key": "time_key",
+						"value": "temporal password value"
+					}
+				],
+				"query": [
+					{
+						"attribute": "report",
+						"type": "string",
+						"description": "report uuid generated"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "string",
+						"description": "type document and image in base 64"
+					}
+				]
+			},
+			{
+				"title": "Document type",
+				"description": "You can get only the type of document in an images if it contains a supported one, it only returns the type of document in text without verifications",
+				"type": "POST",
+				"path": "services/type_document",
+				"attribute": [
+					{
+						"attribute": "front",
+						"type": "image",
+						"description": "image from document"
+					}
+				],
+				"headers": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data"
+					},
+					{
+						"key": "api_key",
+						"value": "api public value"
+					},
+					{
+						"key": "api_secret",
+						"value": "api secret value"
+					},
+					{
+						"key": "time_key",
+						"value": "temporal password value"
+					}
+				],
+				"query": [
+					{
+						"attribute": "report",
+						"type": "string",
+						"description": "report uuid generated"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "string",
+						"description": "type document text"
+					}
+				]
+			},
+			{
+				"title": "ID Verification",
+				"description": "You must provide both images of the identity document in case the document has them or the front part if it is a passport. Extract the data found and its verifications",
+				"type": "POST",
+				"path": "services/tid",
+				"attribute": [
+					{
+						"attribute": "front",
+						"type": "image",
+						"description": "image from document"
+					},
+					{
+						"attribute": "back",
+						"type": "image",
+						"description": "image from back document"
+					}
+				],
+				"headers": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data"
+					},
+					{
+						"key": "api_key",
+						"value": "api public value"
+					},
+					{
+						"key": "api_secret",
+						"value": "api secret value"
+					},
+					{
+						"key": "time_key",
+						"value": "temporal password value"
+					}
+				],
+				"query": [
+					{
+						"attribute": "report",
+						"type": "string",
+						"description": "report uuid generated"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "map",
+						"description": "document description"
+					}
+				]
+			},
+			{
+				"title": "Face spoofing",
+				"description": "You must provide a photograph of the face of the person to be analyzed, and return the status, true for a satisfactory test and false for a failed test, as well as the score obtained according to the class found",
+				"type": "POST",
+				"path": "services/face",
+				"attribute": [
+					{
+						"attribute": "face",
+						"type": "image",
+						"description": "face picture"
+					}
+				],
+				"headers": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data"
+					},
+					{
+						"key": "api_key",
+						"value": "api public value"
+					},
+					{
+						"key": "api_secret",
+						"value": "api secret value"
+					},
+					{
+						"key": "time_key",
+						"value": "temporal password value"
+					}
+				],
+				"query": [
+					{
+						"attribute": "report",
+						"type": "string",
+						"description": "report uuid generated"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "map",
+						"description": "spoofing status and score by class"
+					}
+				]
+			},
+			{
+				"title": "Proof of address",
+				"description": "The method admits images or pdf files and returns the addresses found in the document, if the ID address is available, it will match and return the exact address if it matches",
+				"type": "POST",
+				"path": "services/address",
+				"attribute": [
+					{
+						"attribute": "document",
+						"type": "image/pdf",
+						"description": "proof address file"
+					}
+				],
+				"headers": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data"
+					},
+					{
+						"key": "api_key",
+						"value": "api public value"
+					},
+					{
+						"key": "api_secret",
+						"value": "api secret value"
+					},
+					{
+						"key": "time_key",
+						"value": "temporal password value"
+					}
+				],
+				"query": [
+					{
+						"attribute": "report",
+						"type": "string",
+						"description": "report uuid generated"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "map",
+						"description": "address matches"
+					}
+				]
+			},
+			{
+				"title": "Save address",
+				"description": "You can assign a home address to a report in order to store it on the NebuIA server, you can access this data when you check the details of a report",
+				"type": "PUT",
+				"path": "services/address",
+				"attribute": [
+					{
+						"attribute": "address",
+						"type": "array string",
+						"description": "address from user"
+					}
+				],
+				"headers": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "api_key",
+						"value": "api public value"
+					},
+					{
+						"key": "api_secret",
+						"value": "api secret value"
+					},
+					{
+						"key": "time_key",
+						"value": "temporal password value"
+					}
+				],
+				"query": [
+					{
+						"attribute": "report",
+						"type": "string",
+						"description": "report uuid generated"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "string",
+						"description": "aoperation result"
+					}
+				]
+			},
+			{
+				"title": "Resources",
+				"description": "You can obtain the images of the id verifications, the user's face and the proof of address provided that the user has made said verifications, If you want to obtain the identity document you must provide the side to obtain (front / back), for example docs/front",
+				"type": "GET",
+				"path": "services/{address, faces, docs}",
+				"attribute": [],
+				"headers": [
+					{
+						"key": "Content-Type",
+						"value": "image/jpeg"
+					},
+					{
+						"key": "api_key",
+						"value": "api public value"
+					},
+					{
+						"key": "api_secret",
+						"value": "api secret value"
+					},
+					{
+						"key": "time_key",
+						"value": "temporal password value"
+					}
+				],
+				"query": [
+					{
+						"attribute": "report",
+						"type": "string",
+						"description": "report uuid generated"
+					}
+				],
+				"response": [
+					{
+						"name": "file",
+						"type": "image/jpeg",
+						"description": "image required"
+					}
+				]
+			}
+		]
+	},
+	{
+		"section": "OTP",
+		"data": [
+			{
+				"title": "Assign email",
+				"description": "In order to validate the email you must first assign an email to the report provided. You can get the details of this within the report summary",
+				"type": "PUT",
+				"path": "/services/email",
+				"attribute": [
+					{
+						"attribute": "email.email",
+						"type": "map",
+						"description": "email address from user"
+					}
+				],
+				"headers": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "api_key",
+						"value": "api public value"
+					},
+					{
+						"key": "api_secret",
+						"value": "api secret value"
+					},
+					{
+						"key": "time_key",
+						"value": "temporal password value"
+					}
+				],
+				"query": [
+					{
+						"attribute": "report",
+						"type": "string",
+						"description": "report uuid generated"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "string",
+						"description": "aperation result"
+					}
+				]
+			},
+			{
+				"title": "Email OTP generator",
+				"description": "An email is validated by means of a password of 10 minutes, you must provide the email to send verification cod",
+				"type": "GET",
+				"path": "/otp/generate/email",
+				"attribute": [],
+				"headers": [
+					{
+						"key": "api_key",
+						"value": "api public value"
+					},
+					{
+						"key": "api_secret",
+						"value": "api secret value"
+					},
+					{
+						"key": "time_key",
+						"value": "temporal password value"
+					}
+				],
+				"query": [
+					{
+						"attribute": "report",
+						"type": "string",
+						"description": "report uuid generated"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "string",
+						"description": "operation result"
+					}
+				]
+			},
+			{
+				"title": "Email OTP validation",
+				"description": "When the user receives the OTP you must verify it, both expiation and validity are contemplated in this test",
+				"type": "GET",
+				"path": "/otp/validate/email/{otp_code}",
+				"attribute": [],
+				"headers": [
+					{
+						"key": "api_key",
+						"value": "api public value"
+					},
+					{
+						"key": "api_secret",
+						"value": "api secret value"
+					},
+					{
+						"key": "time_key",
+						"value": "temporal password value"
+					}
+				],
+				"query": [
+					{
+						"attribute": "report",
+						"type": "string",
+						"description": "report uuid generated"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "string",
+						"description": "operation result"
+					}
+				]
+			},
+			{
+				"title": "Assign phone",
+				"description": "In order to validate the phone number you must first assign an email to the report provided. You can get the details of this within the report summary",
+				"type": "PUT",
+				"path": "/services/phone",
+				"attribute": [
+					{
+						"attribute": "phone.phone",
+						"type": "map",
+						"description": "phone number address from user"
+					}
+				],
+				"headers": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "api_key",
+						"value": "api public value"
+					},
+					{
+						"key": "api_secret",
+						"value": "api secret value"
+					},
+					{
+						"key": "time_key",
+						"value": "temporal password value"
+					}
+				],
+				"query": [
+					{
+						"attribute": "report",
+						"type": "string",
+						"description": "report uuid generated"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "string",
+						"description": "aperation result"
+					}
+				]
+			},
+			{
+				"title": "Phone OTP generator",
+				"description": "An phone number is validated by means of a password of 10 minutes, you must provide the phone number to send verification code",
+				"type": "GET",
+				"path": "otp/generate/email",
+				"attribute": [],
+				"headers": [
+					{
+						"key": "api_key",
+						"value": "api public value"
+					},
+					{
+						"key": "api_secret",
+						"value": "api secret value"
+					},
+					{
+						"key": "time_key",
+						"value": "temporal password value"
+					}
+				],
+				"query": [
+					{
+						"attribute": "report",
+						"type": "string",
+						"description": "report uuid generated"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "string",
+						"description": "operation result"
+					}
+				]
+			},
+			{
+				"title": "Phone OTP validation",
+				"description": "When the user receives the OTP via SMS you must verify it, both expiation and validity are contemplated in this test",
+				"type": "GET",
+				"path": "otp/validate/phone/{otp_code}",
+				"attribute": [],
+				"headers": [
+					{
+						"key": "api_key",
+						"value": "api public value"
+					},
+					{
+						"key": "api_secret",
+						"value": "api secret value"
+					},
+					{
+						"key": "time_key",
+						"value": "temporal password value"
+					}
+				],
+				"query": [
+					{
+						"attribute": "report",
+						"type": "string",
+						"description": "report uuid generated"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "string",
+						"description": "operation result"
+					}
+				]
+			}
+		]
+	},
+	{
+		"section": "Fingerprint",
+		"data": [
+			{
+				"title": "Extract fingerprint from hand",
+				"description": "In order to correctly extract the fingerprints by means of a photo, you must provide the photo by focusing on the fingertips with the camera's flash activated, you will obtain the images extracted in base64 and the obtained nfiq. The results are experimental",
+				"type": "POST",
+				"path": "services/fingerprints",
+				"attribute": [
+					{
+						"attribute": "image",
+						"type": "image",
+						"description": "picture from hand with flash led"
+					}
+				],
+				"headers": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data"
+					},
+					{
+						"key": "api_key",
+						"value": "api public value"
+					},
+					{
+						"key": "api_secret",
+						"value": "api secret value"
+					},
+					{
+						"key": "time_key",
+						"value": "temporal password value"
+					}
+				],
+				"query": [
+					{
+						"attribute": "report",
+						"type": "string",
+						"description": "report uuid generated"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "map",
+						"description": "fingerprints images in base64 with nfiq score"
+					}
+				]
+			},
+			{
+				"title": "Nfiq score",
+				"description": "You must provide an already processed fingerprint to get the score correctly",
+				"type": "POST",
+				"path": "services/nfiq",
+				"attribute": [
+					{
+						"attribute": "image",
+						"type": "image",
+						"description": "fingerprint image processed"
+					}
+				],
+				"headers": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data"
+					},
+					{
+						"key": "api_key",
+						"value": "api public value"
+					},
+					{
+						"key": "api_secret",
+						"value": "api secret value"
+					},
+					{
+						"key": "time_key",
+						"value": "temporal password value"
+					}
+				],
+				"query": [
+					{
+						"attribute": "report",
+						"type": "string",
+						"description": "report uuid generated"
+					}
+				],
+				"response": [
+					{
+						"name": "status",
+						"type": "boolean",
+						"description": "status request"
+					},
+					{
+						"name": "payload",
+						"type": "int",
+						"description": "fingerprint nfiq score"
+					}
+				]
+			},
+			{
+				"title": "WSQ",
+				"description": "You can generate a WSQ (Wavelet Scalar Quantification) file of a processed fingerprint",
+				"type": "POST",
+				"path": "services/wsq",
+				"attribute": [
+					{
+						"attribute": "image",
+						"type": "image",
+						"description": "fingerprint image processed"
+					}
+				],
+				"headers": [
+					{
+						"key": "Content-Type",
+						"value": "multipart/form-data"
+					},
+					{
+						"key": "api_key",
+						"value": "api public value"
+					},
+					{
+						"key": "api_secret",
+						"value": "api secret value"
+					},
+					{
+						"key": "time_key",
+						"value": "temporal password value"
+					}
+				],
+				"query": [
+					{
+						"attribute": "report",
+						"type": "string",
+						"description": "report uuid generated"
+					}
+				],
+				"response": [
+					{
+						"name": "payload",
+						"type": "byte file",
+						"description": "fingerprint wsq file"
+					}
+				]
+			}
+		]
+	}
+]
