@@ -1,19 +1,14 @@
 <script lang="ts">
-	import { active } from '../../stores/state';
+	import { active, trainingData, Active, DataTraining } from '../../stores/state';
 
-	export let images;
+	let data: DataTraining;
 
-	function _setActive(file) {
-		var reader = new FileReader();
-		reader.onload = function (f) {
-			var data = f.target.result;
-			active.set({
-				name: file.name,
-				image: data,
-				rect: []
-			});
-		};
-		 reader.readAsDataURL(file);
+	trainingData.subscribe(change => {
+		data = change;
+	});
+
+	function _setActive(item: Active) {
+		active.set(item);
 	}
 
 	function bytesToSize(bytes) {
@@ -30,14 +25,14 @@
 <div class="h-screen/2 flex">
 	<div class="flex-1 overflow-y-scroll scrollbar-hide">
 		<div class="grid grid-cols-2">
-			{#if images}
-				{#each images as image}
-					<div on:click={() => _setActive(image)} class="px-2 py-1">
+				{#if data}
+					{#each data.items as item}
+					<div on:click={() => _setActive(item)} class="px-2 py-1">
 						<div
 							class="group block w-full aspect-w-7 aspect-h-10 rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-offset-gray-100 focus-within:ring-indigo-500 overflow-hidden"
 						>
 							<img
-								src={URL.createObjectURL(image)}
+								src={item.image}
 								alt=""
 								class="object-cover pointer-events-none group-hover:opacity-75"
 							/>
@@ -46,14 +41,14 @@
 							</button>
 						</div>
 						<p class="mt-2 block text-xs font-medium text-white truncate pointer-events-none">
-							{image.name}
+							{item.name}
 						</p>
 						<p class="block text-xs font-medium text-gray-300 pointer-events-none">
-							{bytesToSize(image.size)}
+							{bytesToSize(item.size)}
 						</p>
 					</div>
 				{/each}
-			{/if}
+				{/if}
 		</div>
 
 		<!-- More files... -->

@@ -380,6 +380,3 @@
 		</nav>
 	</div>
 </div>
-
-<style>
-</style>

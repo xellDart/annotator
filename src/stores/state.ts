@@ -12,11 +12,19 @@ export interface Rect {
 export interface Active {
     rect?: Rect[];
     name?: string;
+    size?: number;
     image?: string | ArrayBuffer;
+}
+
+export interface DataTraining {
+    items?: Active[];
 }
 
 export const active = writable<Active>({
     rect: []
 });
 
+export const trainingData = writable<DataTraining>({
+    items: []
+});
 export const selectItem = writable<number>(-1);

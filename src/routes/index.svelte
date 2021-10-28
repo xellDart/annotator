@@ -2,46 +2,32 @@
 	import Annotation from '$lib/components/annotation.svelte';
 	import SideBarImages from '$lib/components/sidebar_images.svelte';
 	import SideBarLabels from '$lib/components/sidebar_labels.svelte';
+	import { Active, trainingData } from '../stores/state';
 
-	$: files = [];
 	let fileinput;
 
 	const onFileSelected = (e) => {
 		let image = e.target.files[0];
-		files.push(image);
-		files = files;
-		console.log(image);
+
+		const reader = new FileReader();
+		reader.onload = function (f) {
+			var data = f.target.result;
+			let active: Active = {
+				name: image.name,
+				image: data,
+				size: image.size,
+				rect: []
+			}
+
+			trainingData.update(x => {
+				x.items.push(active);
+				return x;
+			});
+		};
+
+		 reader.readAsDataURL(image);
 	};
-
-
-	let labels = [
-		{
-			type_class: 'sellos_juzgados',
-			rect: {
-				x: 200.03854774504003,
-				y: 551.6930760499433,
-				w: 238.50715096481272,
-				h: 200.84812712826334
-			}
-		},
-		{
-			type_class: 'sellos_notria',
-			rect: {
-				x: 200.03854774504003,
-				y: 551.6930760499433,
-				w: 238.50715096481272,
-				h: 200.84812712826334
-			}
-		}
-	];
 </script>
-
-<!-- This example requires Tailwind CSS v2.0+ 
-<div class="py-12 bg-white">
-	<canvas bind:this={canvas} width="500" height="300" />
-	<button on:click={remove}>REMOVE</button>
-</div>
--->
 
 <div class="h-screen">
 	<div class="grid grid-cols-6 gap-1">
@@ -50,7 +36,7 @@
 				<p class="text-gray-300 px-5 py-3">Archivos</p>
 			</div>
 
-			<SideBarImages images={files} />
+			<SideBarImages />
 		</div>
 		<div class="col-start-2 col-span-4">
 			<Annotation />
